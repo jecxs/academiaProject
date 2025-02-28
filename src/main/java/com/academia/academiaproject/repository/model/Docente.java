@@ -8,11 +8,7 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class Docente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Docente extends BaseEntity{
 
     private String nombre;
     private String apellido;
@@ -21,7 +17,6 @@ public class Docente {
 
     @Column(unique = true, nullable = false)
     private String correo;
-
 
     private String descripcion;
 }
