@@ -1,11 +1,11 @@
 package com.academia.academiaproject.controller.dto.response;
 
-public record AdministrativoResponseDTO(
+public record AlumnoResponseDTO(
         Long id,
         String nombre,
         String apellido,
         String telefono,
-        String email,
-        String cargo
+        String telefonoSecundario,
+        String carrera
 ) {
 }

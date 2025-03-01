@@ -37,9 +37,7 @@ public class DocenteService {
     @Transactional
     public DocenteResponseDTO crear(DocenteRequestDTO dto) {
         Docente docente = docenteMapper.toEntity(dto);
-
         return docenteMapper.toDTO(docenteRepository.save(docente));
-
     }
 
     @Transactional

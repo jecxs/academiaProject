@@ -14,6 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Administrativo extends BaseEntity {
+
     private String nombre;
     private String apellido;
     private String email;
