@@ -1,4 +1,4 @@
 package com.academia.academiaproject.repository.model;
 
-public class Curso {
+public class Curso extends BaseEntity{
 }

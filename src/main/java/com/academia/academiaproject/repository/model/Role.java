@@ -1,4 +1,5 @@
 package com.academia.academiaproject.repository.model;
 
-public class Area extends BaseEntity{
+public class Role extends BaseEntity {
+
 }
