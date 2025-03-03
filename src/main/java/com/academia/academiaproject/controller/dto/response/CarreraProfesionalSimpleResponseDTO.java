@@ -1,8 +1,8 @@
 package com.academia.academiaproject.controller.dto.response;
 
-public record AulaResponseDTO(
+public record CarreraProfesionalSimpleResponseDTO(
         Long id,
         String nombre,
-        String aforo,
-        SedeSimpleDTO sede
+        String descripcion
 ) {}
+

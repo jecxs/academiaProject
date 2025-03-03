@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AlumnoService {
     private final AlumnoRepository alumnoRepository;
-    private final CarreraProfesionalRepository carreraRepository;
+    private final CarreraProfesionalRepository carreraProfesionalRepository;
     private final AlumnoMapper alumnoMapper;
 
     public List<AlumnoResponseDTO> obtenerTodos() {
@@ -34,10 +34,19 @@ public class AlumnoService {
         return alumnoMapper.toDTO(alumno);
     }
 
+    public List<AlumnoResponseDTO> obtenerPorCarrera(Long carreraId) {
+        if (!carreraProfesionalRepository.existsById(carreraId)) {
+            throw new ResourceNotFoundException("Carrera Profesional con ID " + carreraId + " no encontrada.");
+        }
+        return alumnoRepository.findByCarreraId(carreraId).stream()
+                .map(alumnoMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public AlumnoResponseDTO crear(AlumnoRequestDTO dto) {
-        CarreraProfesional carrera = carreraRepository.findById(dto.carreraId())
-                .orElseThrow(() -> new ResourceNotFoundException("Carrera con ID " + dto.carreraId() + " no encontrada."));
+        CarreraProfesional carrera = carreraProfesionalRepository.findById(dto.carreraId())
+                .orElseThrow(() -> new ResourceNotFoundException("Carrera Profesional con ID " + dto.carreraId() + " no encontrada."));
 
         Alumno alumno = alumnoMapper.toEntity(dto);
         alumno.setCarrera(carrera);
@@ -50,13 +59,13 @@ public class AlumnoService {
         Alumno alumno = alumnoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Alumno con ID " + id + " no encontrado."));
 
+        CarreraProfesional carrera = carreraProfesionalRepository.findById(dto.carreraId())
+                .orElseThrow(() -> new ResourceNotFoundException("Carrera Profesional con ID " + dto.carreraId() + " no encontrada."));
+
         alumno.setNombre(dto.nombre());
         alumno.setApellido(dto.apellido());
         alumno.setTelefono(dto.telefono());
         alumno.setTelefonoSecundario(dto.telefonoSecundario());
-
-        CarreraProfesional carrera = carreraRepository.findById(dto.carreraId())
-                .orElseThrow(() -> new ResourceNotFoundException("Carrera con ID " + dto.carreraId() + " no encontrada."));
         alumno.setCarrera(carrera);
 
         return alumnoMapper.toDTO(alumnoRepository.save(alumno));

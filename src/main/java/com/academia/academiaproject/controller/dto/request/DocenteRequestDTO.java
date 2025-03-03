@@ -14,10 +14,9 @@ public record DocenteRequestDTO(
         String apellido,
 
 
-        @Pattern(regexp = "^\\+?\\d{1,3}?[-.\\s]?\\(?\\d{1,4}\\)?[-.\\s]?\\d{3,4}[-.\\s]?\\d{3,4}$\n",message = "El telefono debe tener un formato preestablecido, ejemplos: +51 999-888-777/ " +
-                " +1 (800) 123-4567" +
-                "/ 987654321 " +
-                "/ 01-2345-6789")
+        @Pattern(regexp = "^(\\+\\d{1,3}\\s?)?(\\(\\d{1,4}\\)\\s?)?[\\d\\s\\-]{7,15}$",
+                message = "El telefono debe tener un formato preestablecido, ejemplos: +51 999-888-777/ +1 (800) 123-4567/ 987654321 / 01-2345-6789")
+
         String telefono,
 
         String especialidad,

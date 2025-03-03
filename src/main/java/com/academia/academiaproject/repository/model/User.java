@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="user")
+@Table(name="userS")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseEntity{
-
     private String username;
     private String password;
     private String role;

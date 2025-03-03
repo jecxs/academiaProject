@@ -28,6 +28,12 @@ public class AulaService {
                 .collect(Collectors.toList());
     }
 
+    public List<AulaResponseDTO> obtenerPorSedeId(Long sedeId) {
+        return aulaRepository.findBySedeId(sedeId).stream()
+                .map(aulaMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
     public AulaResponseDTO obtenerPorId(Long id) {
         Aula aula = aulaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Aula con ID " + id + " no encontrada."));

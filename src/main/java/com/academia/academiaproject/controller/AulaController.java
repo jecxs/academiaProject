@@ -21,6 +21,11 @@ public class AulaController {
         return ResponseEntity.ok(aulaService.obtenerTodas());
     }
 
+    @GetMapping("/sede/{sedeId}")
+    public ResponseEntity<List<AulaResponseDTO>> obtenerPorSedeId(@PathVariable Long sedeId) {
+        return ResponseEntity.ok(aulaService.obtenerPorSedeId(sedeId));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AulaResponseDTO> obtenerPorId(@PathVariable Long id) {
         return ResponseEntity.ok(aulaService.obtenerPorId(id));
