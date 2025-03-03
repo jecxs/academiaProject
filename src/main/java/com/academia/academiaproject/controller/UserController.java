@@ -2,6 +2,7 @@ package com.academia.academiaproject.controller;
 
 import com.academia.academiaproject.controller.dto.request.UserRequestDTO;
 import com.academia.academiaproject.controller.dto.response.UserResponseDTO;
+import com.academia.academiaproject.controller.exception.GenericResponse;
 import com.academia.academiaproject.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +28,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> crear(@Valid @RequestBody UserRequestDTO dto) {
-        return ResponseEntity.ok(userService.crear(dto));
+    public ResponseEntity<GenericResponse<UserResponseDTO>> crear(@Valid @RequestBody UserRequestDTO dto) {
+        UserResponseDTO nuevoUsuario = userService.crear(dto);
+        return ResponseEntity.ok(GenericResponse.success("Usuario creado correctamente", nuevoUsuario));
     }
 
     @PutMapping("/{id}")
