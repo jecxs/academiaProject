@@ -2,8 +2,10 @@ package com.academia.academiaproject.controller;
 
 import com.academia.academiaproject.controller.dto.request.AdministrativoRequestDTO;
 import com.academia.academiaproject.controller.dto.response.AdministrativoResponseDTO;
+import com.academia.academiaproject.controller.exception.GenericResponse;
 import com.academia.academiaproject.service.AdministrativoService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/administrativos")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AdministrativoController {
     private final AdministrativoService administrativoService;
+
+    @PostMapping
+    public GenericResponse<AdministrativoResponseDTO> create(@RequestBody AdministrativoRequestDTO request) {
+//        return ResponseEntity.ok(administrativoService.createAdministrativo(request));
+        GenericResponse<AdministrativoResponseDTO> response= new GenericResponse<>("ok", administrativoService.createAdministrativo(request), "creado correctamente");
+        return response;
+    }
 
     @GetMapping
     public ResponseEntity<List<AdministrativoResponseDTO>> obtenerTodos() {
@@ -26,10 +35,6 @@ public class AdministrativoController {
         return ResponseEntity.ok(administrativoService.obtenerPorId(id));
     }
 
-    @PostMapping
-    public ResponseEntity<AdministrativoResponseDTO> crear(@Valid @RequestBody AdministrativoRequestDTO dto) {
-        return ResponseEntity.ok(administrativoService.crear(dto));
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<AdministrativoResponseDTO> actualizar(@PathVariable Long id, @RequestBody AdministrativoRequestDTO dto) {
