@@ -31,6 +31,11 @@ public class SedeController {
         return ResponseEntity.ok(sedeService.crear(dto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<SedeResponseDTO> actualizar(@PathVariable Long id, @Valid @RequestBody SedeRequestDTO dto) {
+        return ResponseEntity.ok(sedeService.actualizar(id, dto));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         sedeService.eliminar(id);

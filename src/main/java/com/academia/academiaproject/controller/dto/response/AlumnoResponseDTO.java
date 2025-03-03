@@ -6,6 +6,6 @@ public record AlumnoResponseDTO(
         String apellido,
         String telefono,
         String telefonoSecundario,
-        String carrera
-) {
-}
+        CarreraSimpleDTO carrera
+) {}
+
